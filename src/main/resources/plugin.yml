@@ -1,0 +1,16 @@
+# Plugin client
+
+name: DiscordSync
+version: 1.0.0
+main: HoldMyAppleJuice.DiscordSync
+api-version: "1.14"
+
+author: HoldMyAppleJuice
+
+
+commands:
+  discord:
+    description: "..."
+    aliases:
+      ds
+    usage: "Usage: /ds"
