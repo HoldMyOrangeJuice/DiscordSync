@@ -1,9 +1,6 @@
 package HoldMyAppleJuice;
 
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
+import ProtocolPackage.Protocol;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
@@ -25,16 +22,9 @@ public class CommandSync implements CommandExecutor {
                 out+=st[(int) Math.floor(st.length*Math.random())];
             }
 
-            String resp = Client.send("player_send_code", player.getUniqueId().toString() + ":" + out);
-            if (resp.equals("player_in_database"))
-            {
-                player.sendMessage("Этот аккаунт уже привязан к Discord!");
-            }
-            else
-            {
-                player.sendMessage("Ваш код:\n" + ChatColor.UNDERLINE + out );
-            }
-            return true;
+            DiscordSync.client.SendMessage(new ClientMessage(Protocol.PLUGIN_GENERATED_CODE, player.getUniqueId().toString(), out).format());
+            player.sendMessage("Ваш код:\n" + ChatColor.UNDERLINE + out );
+
         }
         if (strings.length == 2 && strings[0].equals("deattach"))
         {
@@ -45,15 +35,8 @@ public class CommandSync implements CommandExecutor {
                 player.sendMessage("Такого игрока не существует " + strings[1]);
                 return false;
             }
-            String resp = Client.send("unattach_player", p.getUniqueId().toString());
-            if (resp.equals("removed"))
-            {
-                player.sendMessage("Успешно выполнено.");
-            }
-            if (resp .equals("not_in_list"))
-            {
-                player.sendMessage("UUID не в списке.");
-            }
+            DiscordSync.client.SendMessage(new ClientMessage( Protocol.UNATTACH, p.getUniqueId().toString()).format());
+
         }
         return true;
 
