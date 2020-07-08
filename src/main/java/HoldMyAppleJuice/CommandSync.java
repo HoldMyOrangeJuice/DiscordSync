@@ -1,6 +1,7 @@
 package HoldMyAppleJuice;
 
 import ProtocolPackage.Protocol;
+import ProtocolPackage.communication.ClientMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
@@ -22,7 +23,7 @@ public class CommandSync implements CommandExecutor {
                 out+=st[(int) Math.floor(st.length*Math.random())];
             }
 
-            DiscordSync.client.SendMessage(new ClientMessage(Protocol.PLUGIN_GENERATED_CODE, player.getUniqueId().toString(), out).format());
+            DiscordSync.send(new ClientMessage(Protocol.PLUGIN_GENERATED_CODE, player.getUniqueId().toString(), out).format());
             player.sendMessage("Ваш код:\n" + ChatColor.UNDERLINE + out );
 
         }
@@ -35,7 +36,7 @@ public class CommandSync implements CommandExecutor {
                 player.sendMessage("Такого игрока не существует " + strings[1]);
                 return false;
             }
-            DiscordSync.client.SendMessage(new ClientMessage( Protocol.UNATTACH, p.getUniqueId().toString()).format());
+            DiscordSync.send(new ClientMessage( Protocol.UNATTACH, p.getUniqueId().toString()).format());
 
         }
         return true;

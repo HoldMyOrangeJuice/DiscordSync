@@ -1,6 +1,7 @@
 package HoldMyAppleJuice;
 
 import ProtocolPackage.Protocol;
+import ProtocolPackage.communication.ClientMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,13 +26,13 @@ public class PlayerEventHandler implements Listener
     public void j (PlayerJoinEvent event)
     {
         //String response = MyClient.send("player_joined", event.getPlayer().getUniqueId().toString());
-        DiscordSync.client.SendMessage(new ClientMessage(Protocol.PLAYER_JOINED, event.getPlayer().getUniqueId().toString()).format());
+        DiscordSync.send(new ClientMessage(Protocol.PLAYER_JOINED, event.getPlayer().getUniqueId().toString()).format());
     }
 
     @EventHandler
     public void l (PlayerQuitEvent event)
     {
-        DiscordSync.client.SendMessage(new ClientMessage(Protocol.PLAYER_LEFT, event.getPlayer().getUniqueId().toString()).format());
+        DiscordSync.send(new ClientMessage(Protocol.PLAYER_LEFT, event.getPlayer().getUniqueId().toString()).format());
     }
 
     public static void addPerm(Player p, String perm)

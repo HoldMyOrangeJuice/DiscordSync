@@ -1,8 +1,10 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="DiscordSync:jar">
-    <output-path>$PROJECT_DIR$/../ds</output-path>
+    <output-path>$PROJECT_DIR$/../../Server Enviroment/plugins</output-path>
     <root id="archive" name="DiscordSync.jar">
       <element id="module-output" name="DiscordSync" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../modules/Protocol.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../modules/Sockets-1.0.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
